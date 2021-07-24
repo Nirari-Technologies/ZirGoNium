@@ -17,6 +17,7 @@
 	* Operator Overloading (full operators from host app, limited for script devs)
 		* script devs only get limited number of operators to overload.
 		* script overloadable operators operators:
+		```
 			`<- (read)`        - func S method() T
 			`<-2 (read)`       - func S method() (T1, T2)
 			`-> (read)`        - func S method() T
@@ -30,10 +31,12 @@
 			`<-->= (write)`    - func S method(a, b T)
 			`* (deref read)`   - func S method() T
 			`*= (deref write)` - func S method(val T)
+		```
 		* Host API overloadable operators:
-			binary: `+, -, *, /, %, &, ^, |, &^, <<, >>, >>>, **, &&, ||, ==, <=, >=, !=, =, .` [=]
-			unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, [::], {}` [=]
+			* binary: `+, -, *, /, %, &, ^, |, &^, <<, >>, >>>, **, &&, ||, ==, <=, >=, !=, =, .` [=]
+			* unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, [::], {}` [=]
 		* script overloadable built-ins:
+		```
 			`new`              - func new(T) *T
 			`delete`           - func delete(a T, ...any)
 			`append`           - func append(a T, b ...T) T
@@ -42,6 +45,7 @@
 			`cap`              - func cap(a T) uint
 			`make`             - func make(T, sizes ...uint) T
 			`range`            - func range(a T1) (T2, T3)
+		```
 
 * Light, Expressive Syntax.
 
