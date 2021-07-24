@@ -1,19 +1,22 @@
-/// Top grammar
+Top grammar
+```ebnf
 SourceFile     = ModuleSpec ";" { ImportDecl ";" } { TopLevelDecl ";" } .
 ModuleSpec     = "module" <id> .
+```
 
-
-/// Import grammar
+Import grammar
+```ebnf
 ImportSpec     = [ "." | <id> ] <string> .
 ImportDecl     = "import" ( ImportSpec | "(" { ImportSpec ";" } ")" ) .
-
-/*
+```
+```go
 import   "lib/math" ==> math.Sin
 import m "lib/math" ==> m.Sin
 import . "lib/math" ==> Sin
- */
+```
 
-/// Decl grammar
+Decl grammar
+```ebnf
 TopLevelDecl   = Declaration | FunctionDecl | MethodDecl | OpOverloadDecl .
 
 Declaration    = ConstDecl | TypeDecl | VarDecl .
@@ -36,14 +39,16 @@ TypeDef        = identifier [ GenericSpec ] Type .
 
 VarDecl        = "var" ( VarSpec | "(" { VarSpec ";" } ")" ) .
 VarSpec        = IdentifierList ( Type [ "=" ExpressionList ] | "=" ExpressionList ) .
+```
 
-/// Func Decl Grammar
+Func Decl Grammar
+```ebnf
 FunctionDecl   = "func" FuncName [ GenericSpec ] Signature [ Block ] .
 
-/// these are the only operators allowed to be overloaded from script level.
-/// Anything else should be implemented via Host app API for full control of operator overloading.
+## these are the only operators allowed to be overloaded from script level.
+## Anything else should be implemented via Host app API for full control of operator overloading.
 OpOverloadDecl = "func" "(" identifier Type ")" AllowOps Signature [ Block ] .
-AllowOps       = ("[" "]" | "<-" | "->" | "<->" | "*" | "." ) [ "=" ] .
+AllowOps       = ("[" "]" | "<-" | "->" | "<-->" | "*" | "." ) [ "=" ] .
 
 MethodDecl     = "func" "(" identifier Type ")" MethodName [ GenericSpec ] Signature [ Block ] .
 
@@ -53,8 +58,10 @@ Result         = Parameters | Type .
 Parameters     = "(" [ ParameterList [ "," ] ] ")" .
 ParameterList  = ParameterDecl { "," ParameterDecl } .
 ParameterDecl  = [ IdentifierList ] [ "..." ] Type .
+```
 
-/// Block grammar
+Block grammar
+```ebnf
 Block          = "{" StatementList "}" .
 StatementList  = { Statement ";" } .
 Statement      = Declaration | LabeledStmt | SimpleStmt | ReturnStmt | BreakStmt | ContinueStmt | GotoStmt | FallthruStmt | Block | IfStmt | SwitchStmt | ForStmt | DeferStmt .
@@ -92,8 +99,10 @@ IncDecStmt     = Expression ( "++" | "--" ) .
 
 Assignment     = ExpressionList assign_op ExpressionList .
 assign_op      = [ add_op | mul_op ] "=" .
+```
 
-/// Type grammar
+Type grammar
+```ebnf
 Type           = TypeName | TypeLit | "(" Type ")" .
 TypeName       = identifier | QualifiedIdent .
 TypeLit        = ArrayType | StructType | PointerType | FunctionType | InterfaceType | SliceType | MapType | SetType | TreeType | GraphType .
@@ -117,9 +126,10 @@ PointerType    = "*" Type .
 
 InterfaceType  = "interface" "{" { ( MethodSpec | TypeName ) ";" } "}" .
 MethodSpec     = identifier Signature .
+```
 
-
-/// Expression grammar
+Expression grammar
+```ebnf
 Expression     = UnaryExpr | Expression binary_op Expression .
 UnaryExpr      = [ unary_op ] PrimaryExpr .
 
@@ -152,3 +162,4 @@ Operand        = Literal | OperandName | "(" Expression ")" .
 Literal        = BasicLit | CompositeLit | FunctionLit .
 BasicLit       = int_lit | float_lit | rune_lit | string_lit .
 OperandName    = identifier | QualifiedIdent .
+```
