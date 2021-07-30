@@ -76,6 +76,8 @@
 * Enum/Const values with special incrementing syntax like: (Q? iota value with control of how it increments?)
 	* enum ( <<= 1 ) { values };
 
+* No background/hidden state execution that wasn't done by the script developer.
+
 
 - Allows designers to build complex gameplay elements, define complex ai behaviors, create gameflow with minimal work from the software engineers.
 - Handles memory allocation/destruction behind the scenes
