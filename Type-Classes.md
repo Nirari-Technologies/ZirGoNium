@@ -18,7 +18,8 @@
 
 **Aggregates** => `struct{}, interface{}, [n]type, []type, map[type]type, set[type], tree[type], graph[type]type, string`.
 * strings are implicitly interchangeable with [](u)int8/byte and [](u)int32/rune.
-* [n]type is implicitly casted to []type. Vice versa is illegal and requires copying instead.
+* [n]type can be casted to []type. Vice versa is illegal.
+	* []type can be casted to \*[n]type (pointer to fixed-size array).
 * set[type] can be implicitly casted to []type but not vice versa.
 * arrays of the same type but different sizes can be assigned to each other but copied only by the shortest of the two.
 	* When done during declaration, if smaller, the remaining values will be zero-initialized.
