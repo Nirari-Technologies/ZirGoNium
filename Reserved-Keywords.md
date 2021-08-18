@@ -16,6 +16,7 @@ import
 interface
 map
 module
+none
 range
 return
 set
