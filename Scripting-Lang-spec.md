@@ -98,39 +98,15 @@ ExpressionStmt = Expression .
 IncDecStmt     = Expression ( "++" | "--" ) .
 
 Assignment     = ExpressionList assign_op ExpressionList .
-assign_op      = [ add_op | mul_op ] "=" .
-```
-
-Type grammar
-```ebnf
-Type           = TypeName | TypeLit | "(" Type ")" .
-TypeName       = identifier | QualifiedIdent .
-TypeLit        = ArrayType | StructType | PointerType | FunctionType | InterfaceType | SliceType | MapType | SetType | TreeType | GraphType .
-
-ArrayType      = "[" Expression "]" Type .
-SliceType      = "[" "]" Type .
-MapType        = "map" "[" KeyType "]" ValType .
-KeyType        = Type .
-ValType        = Type .
-
-SetType        = "set" "[" Type "]" .
-TreeType       = "tree" "[" Type "]" .
-GraphType      = "graph" "[" VertType "]" EdgeType .
-VertType       = Type .
-EdgeType       = Type .
-
-StructType     = "struct" "{" { FieldDecl ";" } "}" .
-FieldDecl      = (IdentifierList Type | EmbeddedField) .
-EmbeddedField  = [ "*" ] TypeName .
-PointerType    = "*" Type .
-
-InterfaceType  = "interface" "{" { ( MethodSpec | TypeName ) ";" } "}" .
-MethodSpec     = identifier Signature .
+assign_op      = [ add_op | mul_op | pow_op ] "=" .
 ```
 
 Expression grammar
 ```ebnf
-Expression     = UnaryExpr | Expression binary_op Expression .
+Expression     = MainExpr | TernaryExpr.
+MainExpr       = UnaryExpr | BinaryExpr .
+TernaryExpr    = "(" Condition ")" "?" MainExpr ":" MainExpr .
+BinaryExpr     = Expression binary_op Expression .
 UnaryExpr      = [ unary_op ] PrimaryExpr .
 
 binary_op      = "||" | "&&" | rel_op | add_op | mul_op | pow_op .
@@ -162,4 +138,31 @@ Operand        = Literal | OperandName | "(" Expression ")" .
 Literal        = BasicLit | CompositeLit | FunctionLit .
 BasicLit       = int_lit | float_lit | rune_lit | string_lit .
 OperandName    = identifier | QualifiedIdent .
+```
+
+Type grammar
+```ebnf
+Type           = TypeName | TypeLit | "(" Type ")" .
+TypeName       = identifier | QualifiedIdent .
+TypeLit        = ArrayType | StructType | PointerType | FunctionType | InterfaceType | SliceType | MapType | SetType | TreeType | GraphType .
+
+ArrayType      = "[" Expression "]" Type .
+SliceType      = "[" "]" Type .
+MapType        = "map" "[" KeyType "]" ValType .
+KeyType        = Type .
+ValType        = Type .
+
+SetType        = "set" "[" Type "]" .
+TreeType       = "tree" "[" Type "]" .
+GraphType      = "graph" "[" VertType "]" EdgeType .
+VertType       = Type .
+EdgeType       = Type .
+
+StructType     = "struct" "{" { FieldDecl ";" } "}" .
+FieldDecl      = (IdentifierList Type | EmbeddedField) .
+EmbeddedField  = [ "*" ] TypeName .
+PointerType    = "*" Type .
+
+InterfaceType  = "interface" "{" { ( MethodSpec | TypeName ) ";" } "}" .
+MethodSpec     = identifier Signature .
 ```
