@@ -104,10 +104,10 @@ assign_op      = [ add_op | mul_op | pow_op ] "=" .
 Expression grammar
 ```ebnf
 Expression     = MainExpr | TernaryExpr.
-MainExpr       = UnaryExpr | BinaryExpr .
+MainExpr       = UnaryExpr | MainExpr binary_op MainExpr .
 TernaryExpr    = "(" Condition ")" "?" MainExpr ":" MainExpr .
-BinaryExpr     = Expression binary_op Expression .
-UnaryExpr      = [ unary_op ] PrimaryExpr .
+BinaryExpr     = MainExpr binary_op MainExpr .
+UnaryExpr      = PrimaryExpr | unary_op UnaryExpr .
 
 binary_op      = "||" | "&&" | rel_op | add_op | mul_op | pow_op .
 rel_op         = "==" | "!=" | "<" | "<=" | ">" | ">=" .
