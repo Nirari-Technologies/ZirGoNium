@@ -48,6 +48,7 @@
 		```
 
 * Light, Expressive Syntax.
+	* added ternary operator, cannot be nested!
 
 * Efficient garbage collection that has little-to-no impact on app performance.
 	* Incremental/Concurrent Mark & Sweep with generations + lazy sweeping.
