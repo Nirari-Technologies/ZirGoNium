@@ -10,7 +10,7 @@
 * casting smaller int to larger uint requires explicit cast. Warning otherwise.
 * mixing int     + uint   = uint.   Warning without explicit cast.
 * mixing smaller + larger = larger. Warning without explicit cast.
-	
+
 **Floats** => `float32, float64, floatmax`.
 * mixing smaller + larger = larger implicitly.
 * casting to and from int and float32/float64 is implicit.
@@ -18,15 +18,15 @@
 
 **Aggregates** => `struct{}, interface{}, [n]type, []type, map[type]type, set[type], tree[type], graph[type]type, string`.
 * strings are implicitly interchangeable with [](u)int8/byte and [](u)int32/rune.
-* [n]type can be casted to []type. Vice versa is illegal.
+* [n]type can be casted to []type or created by slicing expression. Vice versa is illegal.
 	* []type can be casted to \*[n]type (pointer to fixed-size array).
 * set[type] can be implicitly casted to []type but not vice versa.
 * arrays of the same type but different sizes can be assigned to each other but copied only by the shortest of the two.
-	* When done during declaration, if smaller, the remaining values will be zero-initialized.
+	* When done during declaration, if smaller, the remaining values in the larger will be zero-initialized.
 * struct{type}, where all fields are of a single type, is interchangeable with []type.
-	* if fixed-size, the [n]type array must be equal-or-larger than the member count of the struct.
+	* if fixed-size array, [n]type must be equal or smaller than the member count of the struct.
 * Typedef'd names will take on the type class they're based on.
-	
+
 **Specials** => `func(params)type, *type`.
 * pointers are distant-cousins of Integer type class.
 	* pointer values can be implicitly casted to (u)int only.
