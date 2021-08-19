@@ -78,7 +78,7 @@ FallthruStmt   = "fallthru" .
 IfStmt         = "if" [ SimpleStmt ";" ] Expression Block [ "else" ( IfStmt | Block ) ] .
 ShortVarDecl   = IdentifierList ":=" ExpressionList .
 
-SwitchStmt     = ExprSwitchStmt | TypeSwitchStmt .
+SwitchStmt     = ExprSwitchStmt .
 ExprSwitchStmt = "switch" [ SimpleStmt ";" ] [ (Expression | PrimaryExpr "." "(" "type" ")") ] "{" { ExprCaseClause } "}" .
 ExprCaseClause = ExprSwitchCase ":" StatementList .
 ExprSwitchCase = "case" (ExpressionList | TypeList) | "default" .
