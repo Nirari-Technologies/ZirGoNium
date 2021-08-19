@@ -105,7 +105,7 @@ Expression grammar
 ```ebnf
 Expression     = MainExpr | TernaryExpr.
 MainExpr       = UnaryExpr | MainExpr binary_op MainExpr .
-TernaryExpr    = "(" Condition ")" "?" MainExpr ":" MainExpr .
+TernaryExpr    = "if" "(" Condition ")" MainExpr "else" MainExpr .
 BinaryExpr     = MainExpr binary_op MainExpr .
 UnaryExpr      = PrimaryExpr | unary_op UnaryExpr .
 
