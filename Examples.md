@@ -29,12 +29,18 @@ l := <-t
 r := t->
 l, r = <-t->
 /// l, r := <-t->
+var a int = *t   /// get current node/root value.
+var b int = *<-t /// get left child value.
+var c     = *t-> /// get right child value.
 
-/// nil-check R's left node.
+x, y := *<-t->   /// get both left + right child value together.
+
+/// nil-check 'r's left node.
 if <-r==nil {
 	new_left := tree[int]{66}
 	<-r = new_left
 }
+
 ```
 
 # Builtin Graph example
