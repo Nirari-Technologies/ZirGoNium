@@ -1,6 +1,6 @@
 # ZirGoNium
 
-* Anonymous.
+* Anonymous Functions.
 	* capturing is done via scope-analysis and passing the variable by reference parameter.
 
 * Statically typed w/ type inferencing.
