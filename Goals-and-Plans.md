@@ -1,7 +1,7 @@
 # ZirGoNium
 
-* Function Literals.
-	* No closures as they have too much overhead due to environment capturing.
+* Anonymous.
+	* capturing is done via scope-analysis and passing the variable by reference parameter.
 
 * Statically typed w/ type inferencing.
 
