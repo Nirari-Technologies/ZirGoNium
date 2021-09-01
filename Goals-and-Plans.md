@@ -2,6 +2,7 @@
 
 * Anonymous Functions.
 	* capturing is done via scope-analysis and passing the variable by reference parameter.
+	* No environment is actually saved.
 
 * Statically typed w/ type inferencing.
 
