@@ -65,15 +65,14 @@
 			* binary: `+, -, *, /, %, &, ^, |, &^, <<, >>, >>>, **, &&, ||, ==, <=, >=, !=, =, . [=]`
 			* unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, {} [=]`
 		* script overloadable built-ins:
-		```
-			`new`              - func new(T) *T
-			`delete`           - func delete(a T, ...any)
-			`append`           - func append(a T, b ...T) T
-			`copy`             - func copy(dst, src T) uint
-			`len`              - func len(a T) uint
-			`cap`              - func cap(a T) uint
-			`make`             - func make(T, sizes ...uint) T
-			`range`            - func range(a T1) (T2, T3)
+		```go
+		func delete(a T, ...any)
+		func append(a T, b ...T) T
+		func make[T](sizes ...uint) T
+		func copy(dst, src T) uint
+		func len(a T) uint
+		func cap(a T) uint
+		func range(a T1) (T2, T3)
 		```
 
 * Light, Expressive Syntax.
