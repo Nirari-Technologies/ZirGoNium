@@ -17,25 +17,53 @@
 * App-defined Types can define their own operators.
 	* Operator Overloading (full operators from host app, limited for script devs)
 		* script devs only get limited number of operators to overload.
+		* Overloading implemented by satisfying overloader interfaces:
+		```go
+		type (
+			__opLeftArrow[T1, T2] interface {
+				func Read()   T1         /// value := <-t
+				func Read2() (T1, T2)    /// value, extra := <-t
+				func Write(T1)           /// <-t = value
+			}
+			__opRightArrow[T1, T2] interface {
+				func Read()   T1         /// value := t->
+				func Read2() (T1, T2)    /// value, extra := t->
+				func Write(T1)           /// t-> = value
+			}
+			__opIndex[T1, T2, T3] interface {
+				func Read(T1)   T2       /// value := t[T1]
+				func Read2(T1) (T2, T3)  /// value, extra := t[T1]
+				func Write(T1, T2)       /// t[T1] = T2
+			}
+			__opTwoArrows[T1, T2] interface {
+				func Read() (T1, T2)     /// value1, value2 := <-t->
+				func Write(T1, T2)       /// <-t-> = value1, value2
+			}
+			__opDeref[T] interface {
+				func Read() T            /// value := *t
+				func Write(T)            /// *t = value
+			}
+		)
+		```
 		* script overloadable operators operators:
 		```
-			`<- (read)`        - func S method() T
-			`<-2 (read)`       - func S method() (T1, T2)
-			`-> (read)`        - func S method() T
-			`->2 (read)`       - func S method() (T1, T2)
-			`<-= (write)`      - func S method(a T)
-			`->= (write)`      - func S method(a T)
-			`[] (read)`        - func S method(a T1) T2
-			`[]2 (read)`       - func S method(a T1) (T2, T3)
-			`[]= (write)`      - func S method(a T1, val T2)
-			`<--> (read)`      - func S method() (T1, T2)
-			`<-->= (write)`    - func S method(a, b T)
-			`* (deref read)`   - func S method() T
-			`*= (deref write)` - func S method(val T)
+			`<-    (read)`        - func S method() T
+			`<-2   (read)`        - func S method() (T1, T2)
+			`->    (read)`        - func S method() T
+			`->2   (read)`        - func S method() (T1, T2)
+			`<-=   (write)`       - func S method(a T)
+			`->=   (write)`       - func S method(a T)
+			`[]    (read)`        - func S method(a T1) T2
+			`[]2   (read)`        - func S method(a T1) (T2, T3)
+			`[]=   (write)`       - func S method(a T1, val T2)
+			`<-->  (read)`        - func S method() (T1, T2)
+			`<-->= (write)`       - func S method(a, b T)
+			`*     (deref read)`  - func S method() T
+			`*=    (deref write)` - func S method(val T)
 		```
 		* Host API overloadable operators:
-			* binary: `+, -, *, /, %, &, ^, |, &^, <<, >>, >>>, **, &&, ||, ==, <=, >=, !=, =, .` [=]
-			* unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, [::], {}` [=]
+			* binary: `+, -, *, /, %, &, ^, |, &^, <<, >>, >>>, **, &&, ||, ==, <=, >=, !=, =, . [=]`
+			* unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, {} [=]`
 		* script overloadable built-ins:
 		```
 			`new`              - func new(T) *T
