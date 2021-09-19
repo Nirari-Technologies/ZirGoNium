@@ -1,10 +1,10 @@
-Top grammar
+# Top grammar
 ```ebnf
 SourceFile     = ModuleSpec ";" { ImportDecl ";" } { TopLevelDecl ";" } .
 ModuleSpec     = "module" <id> .
 ```
 
-Import grammar
+# Import grammar
 ```ebnf
 ImportSpec     = [ "." | <id> ] <string> .
 ImportDecl     = "import" ( ImportSpec | "(" { ImportSpec ";" } ")" ) .
@@ -15,7 +15,7 @@ import m "lib/math" ==> m.Sin
 import . "lib/math" ==> Sin
 ```
 
-Decl grammar
+# Decl grammar
 ```ebnf
 TopLevelDecl   = Declaration | FunctionDecl | MethodDecl | OpOverloadDecl .
 
@@ -41,7 +41,7 @@ VarDecl        = "var" ( VarSpec | "(" { VarSpec ";" } ")" ) .
 VarSpec        = IdentifierList ( Type [ "=" ExpressionList ] | "=" ExpressionList ) .
 ```
 
-Func Decl Grammar
+# Func Decl Grammar
 ```ebnf
 FunctionDecl   = "func" FuncName [ GenericSpec ] Signature [ Block ] .
 
@@ -60,7 +60,7 @@ ParameterList  = ParameterDecl { "," ParameterDecl } .
 ParameterDecl  = [ IdentifierList ] [ "..." ] Type .
 ```
 
-Block grammar
+# Block grammar
 ```ebnf
 Block          = "{" StatementList "}" .
 StatementList  = { Statement ";" } .
@@ -101,7 +101,7 @@ Assignment     = ExpressionList assign_op ExpressionList .
 assign_op      = [ add_op | mul_op | pow_op ] "=" .
 ```
 
-Expression grammar
+# Expression grammar
 ```ebnf
 Expression     = MainExpr | TernaryExpr.
 MainExpr       = UnaryExpr | MainExpr binary_op MainExpr .
@@ -140,7 +140,7 @@ BasicLit       = int_lit | float_lit | rune_lit | string_lit .
 OperandName    = identifier | QualifiedIdent .
 ```
 
-Type grammar
+# Type grammar
 ```ebnf
 Type           = TypeName | TypeLit | "(" Type ")" .
 TypeName       = identifier | QualifiedIdent .
