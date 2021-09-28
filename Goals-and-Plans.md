@@ -1,5 +1,6 @@
 # ZirGoNium
 
+## Plans
 * Anonymous Functions.
 	* capturing is done via scope-analysis and passing the variable by reference parameter.
 	* No environment is actually saved.
@@ -108,8 +109,10 @@
 * No background/hidden state execution that wasn't done by the script developer.
 
 * Nested Ternary Expressions are illegal.
+* Custom types with builtin syntax + keywords allowable from Host using special parsing API.
 
 
+## Goals
 - Allows designers to build complex gameplay elements, define complex ai behaviors, create gameflow with minimal work from the software engineers.
 - Handles memory allocation/destruction behind the scenes
 - Does not crash the game when an error occurs
