@@ -1,7 +1,7 @@
 # Top grammar
 ```ebnf
-SourceFile     = ModuleSpec ";" { ImportDecl ";" } { TopLevelDecl ";" } .
-ModuleSpec     = "module" <id> .
+SourceFile     = ImportSpec ";" { ImportDecl ";" } { TopLevelDecl ";" } .
+ImportSpec     = "import" <id> .
 ```
 
 # Import grammar
@@ -144,19 +144,13 @@ OperandName    = identifier | QualifiedIdent .
 ```ebnf
 Type           = TypeName | TypeLit | "(" Type ")" .
 TypeName       = identifier | QualifiedIdent .
-TypeLit        = ArrayType | StructType | PointerType | FunctionType | InterfaceType | SliceType | MapType | SetType | TreeType | GraphType .
+TypeLit        = ArrayType | StructType | PointerType | FunctionType | InterfaceType | SliceType | MapType .
 
 ArrayType      = "[" Expression "]" Type .
 SliceType      = "[" "]" Type .
 MapType        = "map" "[" KeyType "]" ValType .
 KeyType        = Type .
 ValType        = Type .
-
-SetType        = "set" "[" Type "]" .
-TreeType       = "tree" "[" Type "]" .
-GraphType      = "graph" "[" VertType "]" EdgeType .
-VertType       = Type .
-EdgeType       = Type .
 
 StructType     = "struct" "{" { FieldDecl ";" } "}" .
 FieldDecl      = (IdentifierList Type | EmbeddedField) .
