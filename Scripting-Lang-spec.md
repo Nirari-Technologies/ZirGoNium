@@ -154,8 +154,8 @@ ValType        = Type .
 
 StructType     = "struct" "{" { FieldDecl ";" } "}" .
 FieldDecl      = (IdentifierList Type | EmbeddedField) .
-EmbeddedField  = [ "*" ] TypeName .
-PointerType    = "*" Type .
+EmbeddedField  = [ "&" ] TypeName .
+PointerType    = "&" TypeName .
 
 InterfaceType  = "interface" "{" { ( MethodSpec | TypeName ) ";" } "}" .
 MethodSpec     = identifier Signature .
