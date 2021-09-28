@@ -16,11 +16,10 @@
 * casting to and from int and float32/float64 is implicit.
 	* casting to and from uint requires explicit cast, warning otherwise.
 
-**Aggregates** => `struct{}, interface{}, [n]type, []type, map[type]type, set[type], tree[type], graph[type]type, string`.
+**Aggregates** => `struct{}, interface{}, [n]type, []type, map[type]type, string`.
 * strings are implicitly interchangeable with [](u)int8/byte and [](u)int32/rune.
 * [n]type can be casted to []type or created by slicing expression. Vice versa is illegal.
 	* []type can be casted to \*[n]type (pointer to fixed-size array).
-* set[type] can be implicitly casted to []type but not vice versa.
 * arrays of the same type but different sizes can be assigned to each other but copied only by the shortest of the two.
 	* When done during declaration, if smaller, the remaining values in the larger will be zero-initialized.
 * struct{type}, where all fields are of a single type, is interchangeable with []type.
