@@ -21,28 +21,28 @@
 		* Overloading implemented by satisfying overloader interfaces:
 		```go
 		type (
-			__opLeftArrow[T1, T2] interface {
-				func Read()   T1         /// value := <-t
-				func Read2() (T1, T2)    /// value, extra := <-t
-				func Write(T1)           /// <-t = value
+			_OpLeftArrow[T1, T2] interface {
+				func Read[T1, T2](a T1) T2       /// value := <-t
+				func Read2[T1, T2]() (T1, T2)    /// value, extra := <-t
+				func Write[T1](a T1)             /// <-t = value
 			}
-			__opRightArrow[T1, T2] interface {
-				func Read()   T1         /// value := t->
-				func Read2() (T1, T2)    /// value, extra := t->
-				func Write(T1)           /// t-> = value
+			_OpRightArrow[T1, T2] interface {
+				func Read[T1]() T1               /// value := t->
+				func Read2[T1, T2]() (T1, T2)    /// value, extra := t->
+				func Write[T1](a T1)             /// t-> = value
 			}
-			__opIndex[T1, T2, T3] interface {
-				func Read(T1)   T2       /// value := t[T1]
-				func Read2(T1) (T2, T3)  /// value, extra := t[T1]
-				func Write(T1, T2)       /// t[T1] = T2
+			_OpIndex[T1, T2, T3] interface {
+				func Read[T1, T2](a T1) T2             /// value := t[T1]
+				func Read2[T1, T2, T3](a T1) (T2, T3)  /// value, extra := t[T1]
+				func Write[T1, T2](a T1, b T2)         /// t[T1] = T2
 			}
-			__opTwoArrows[T1, T2] interface {
-				func Read() (T1, T2)     /// value1, value2 := <-t->
-				func Write(T1, T2)       /// <-t-> = value1, value2
+			_OpTwoArrows[T1, T2] interface {
+				func Read[T1, T2]() (T1, T2)      /// value1, value2 := <-t->
+				func Write[T1, T2](a T1, b T2)    /// <-t-> = value1, value2
 			}
-			__opDeref[T] interface {
-				func Read() T            /// value := *t
-				func Write(T)            /// *t = value
+			_OpDeref[T] interface {
+				func Read[T]() T    /// value := *t
+				func Write[T](a T)  /// *t = value
 			}
 		)
 		```
@@ -64,16 +64,16 @@
 		```
 		* Host API overloadable operators:
 			* binary: `+, -, *, /, %, &, ^, |, &^, <<, >>, >>>, **, &&, ||, ==, <=, >=, !=, =, . [=]`
-			* unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, {} [=]`
+			* unary:  `+, -, *, &, <-, ->, <-var->, [], !, ^, {initializer} [=]`
 		* script overloadable built-ins:
 		```go
-		func delete(a T, ...any)
-		func append(a T, b ...T) T
+		func delete[T](a T, ...any)
+		func append[T](a T, b ...T) T
 		func make[T](sizes ...uint) T
-		func copy(dst, src T) uint
-		func len(a T) uint
-		func cap(a T) uint
-		func range(a T1) (T2, T3)
+		func copy[T](dst, src T) uint
+		func len[T](a T) uint
+		func cap[T](a T) uint
+		func range[T1, T2, T3](a T1) (T2, T3)
 		```
 
 * Light, Expressive Syntax.
