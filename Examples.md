@@ -26,13 +26,13 @@ func AddV3[T Numeric](a, b Vec3[T]) Vec3[T] {
 ```
 
 
-# Illegal pointer-addressing
+# Illegal pointer addressing
 ```go
 var i int
 p := &i /// type of 'p' is *int
 {
 	var n int
-	p = &n  /// WAS illegal, p is set to nil at the end of this scope. Compiler gives warning.
+	p = &n  /// illegal, p is an immutable pointer and cannot be changed.
 }
 ```
 
